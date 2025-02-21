@@ -22,7 +22,7 @@ const App = () => {
       }
 
       const res = await axios.post(
-        "https://bajaj-backend-gamma-eight.vercel.app/bfhl",
+        "https://bajaj-backend-git-main-rishi-raj-gautams-projects.vercel.app/bfhl",
         parsedData
       );
       const { numbers, highest_alphabet } = res.data;
