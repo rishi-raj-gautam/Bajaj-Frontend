@@ -9,7 +9,7 @@ const options = [
 ];
 
 const App = () => {
-  const [inputData, setInputData] = useState('{"data":["M","1","334","4","B"]}');
+  const [inputData, setInputData] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [response, setResponse] = useState(null);
 
@@ -21,7 +21,10 @@ const App = () => {
         return;
       }
 
-      const res = await axios.post("https://bajaj-backend-gamma-eight.vercel.app/bfhl", parsedData);
+      const res = await axios.post(
+        "https://bajaj-backend-gamma-eight.vercel.app/bfhl",
+        parsedData
+      );
       const { numbers, highest_alphabet } = res.data;
 
       let filteredResponse = {};
@@ -37,39 +40,47 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="max-w-lg w-full text-center p-5 bg-gray-100 shadow-md rounded-lg flex flex-col">
-        <h1 className="text-2xl font-semibold mb-4">Bajaj Finserv Health Dev Challenge</h1>
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 to-black px-4">
+    <h1 className="text-3xl font-semibold text-white text-center mb-6">Bajaj Finserv Health Dev Challenge</h1>
+      <div className="max-w-lg w-full p-6 rounded-xl bg-white/10 shadow-2xl backdrop-blur-lg border border-white/30">
+        
+        
+        
         <div className="text-left w-full">
-          <label className="block text-lg font-semibold mb-1">API Input</label>
+          <label className="block font-medium text-white mb-1">API Input:</label>
           <input
             type="text"
-            className="w-full p-2 border rounded-md"
+            className="w-full p-3 border border-white/20 rounded-md bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
             value={inputData}
             onChange={(e) => setInputData(e.target.value)}
           />
         </div>
+
+        
         <button
           onClick={handleSubmit}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="mt-5 w-full py-3 bg-blue-500 text-white text-lg font-medium rounded-lg hover:bg-blue-600 transition-all"
         >
           Submit
         </button>
-        <h3 className="text-lg font-semibold mt-4">Multi Filter</h3>
+
+        <h3 className="text-lg font-medium mt-6 text-white">Multi Filter</h3>
         <Select
           options={options}
           isMulti
           onChange={setSelectedOptions}
           className="mt-2"
         />
-        <h3 className="text-lg font-semibold mt-4">Filtered Response</h3>
+
+        
+        <h3 className="text-lg font-medium mt-6 text-white">Filtered Response</h3>
         {response ? (
-          <div className="mt-2 p-3 bg-white shadow rounded-md">
+          <div className="mt-3 p-4 bg-white/20 shadow-lg rounded-lg border border-white/30 text-white">
             {response.numbers && <p><strong>Numbers:</strong> {response.numbers.join(", ")}</p>}
             {response.highestAlphabet && <p><strong>Highest Alphabet:</strong> {response.highestAlphabet}</p>}
           </div>
         ) : (
-          <p className="mt-2 text-gray-500">No data</p>
+          <p className="mt-2 text-gray-400">No data</p>
         )}
       </div>
     </div>
